@@ -5,6 +5,9 @@ const path = require("path");
 
 const app = express();
 
+// allow static files
+app.use(express.static(__dirname));
+
 // serve HTML
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -18,7 +21,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 // upload two files
 app.post(
@@ -45,24 +48,19 @@ app.post(
         });
 
         res.send(`
-    <h2>Verification Result</h2>
-
-    ${
-        missing.length === 0
-        ? "<p style='color:green; font-weight:bold;'>All content is as per criteria ✅</p>"
-        : `<p style="color:red; font-weight:bold;">Missing Points:</p>
-           <ul>${missing.map(m => `<li>${m}</li>`).join("")}</ul>`
-    }
-
-    <a href="/">Go Back</a>
-`);
-
+            <h2>Verification Result</h2>
+            ${
+                missing.length === 0
+                ? "<p style='color:green;font-weight:bold;'>All content is as per criteria ✅</p>"
+                : `<p style="color:red;font-weight:bold;">Missing Points:</p>
+                   <ul>${missing.map(m => `<li>${m}</li>`).join("")}</ul>`
+            }
+            <a href="/">Go Back</a>
+        `);
     }
 );
+
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log("Server running on port", PORT);
 });
-
-

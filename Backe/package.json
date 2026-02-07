@@ -1,17 +1,14 @@
 {
-  "name": "backe",
+  "name": "document-verification",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "Ve.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node Ve.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
-    "multer": "^2.0.2"
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "mammoth": "^1.6.0",
+    "pdf-parse": "^1.1.1"
   }
 }
